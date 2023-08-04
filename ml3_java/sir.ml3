@@ -1,0 +1,15 @@
+Person(
+    state : {"s", "i", "r"} := "s"
+)
+
+network:Person[n]<->[n]Person:network
+
+Person
+| ego.state = "s"
+@ ego.network.filter(alter.state = "i").size()
+-> ego.state := "i"
+
+Person
+| ego.state = "i"
+@ 1.0e-3
+-> ego.state := "r"

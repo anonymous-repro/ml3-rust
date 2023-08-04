@@ -1,0 +1,64 @@
+
+Person(
+    state : {"s", "i", "r"} := "s"
+)
+
+network:Person[n]<->[n]Person:network
+
+Person
+| ego.state = "i"
+@ 1.0e-3
+-> ego.state := "r"
+
+Person
+| ego.state = "s"
+@ ego.network.filter(alter.state = "i").size()
+-> ego.state := "i"
+
+Person
+| ego.state = "i"
+@ 1.0e-2
+-> ego.state := "r"
+
+Person
+| ego.state = "r"
+@ 1.0e-4
+-> ego.state := "s"
+
+Person
+| ego.state = "s"
+@ 1.0e-6
+-> ego.state := "i"
+
+/*
+Person(
+    state : {"s", "i", "r"} := "s"
+);
+
+network:Person[0-]<->[0-]Person:network;
+
+Person
+| ego.state = "i"
+@ 1.0e-3
+-> ego.state := "r";
+
+Person
+| ego.state = "s"
+@ ego.network.filter(alter.state = "i").size()
+-> ego.state := "i";
+
+Person
+| ego.state = "i"
+@ 1.0e-2
+-> ego.state := "r";
+
+Person
+| ego.state = "r"
+@ 1.0e-4
+-> ego.state := "s";
+
+Person
+| ego.state = "s"
+@ 1.0e-6
+-> ego.state := "i";
+*/
